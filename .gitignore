@@ -1,0 +1,21 @@
+# STM32CubeIDE workspace metadata
+.metadata/
+RemoteSystemsTempFiles/
+
+# Build output
+Debug/
+Release/
+*.o
+*.d
+*.su
+*.cyclo
+*.elf
+*.map
+*.list
+*.bin
+*.hex
+
+# OS / editor
+Thumbs.db
+.DS_Store
+*.swp
