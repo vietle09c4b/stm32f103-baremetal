@@ -2,6 +2,8 @@
 
 Lập trình STM32F103C8T6 ở mức thanh ghi: không dùng HAL, không dùng LL, không dùng header CMSIS của thiết bị. Mỗi thanh ghi được tạo từ địa chỉ trong RM0008.
 
+`bai02_autosar_led` là stack AUTOSAR viết tay để minh họa kiến trúc (API theo AUTOSAR CP SWS R25-11), không phải MCAL đạt chuẩn: không có ARXML, RTE generator, DET hay AUTOSAR OS.
+
 Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên [vietc4b.com](https://vietc4b.com).
 
 ## Phần cứng
@@ -18,6 +20,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 | Thư mục | Nội dung | Trạng thái |
 |---|---|---|
 | [`bai01_led_pc13`](bai01_led_pc13) | Tạo thanh ghi từ địa chỉ (macro và struct), bật clock GPIOC, cấu hình CRH, nháy LED PC13 bằng BSRR/BRR | Đã chạy trên Blue Pill |
+| [`bai02_autosar_led`](bai02_autosar_led) | Cùng bài toán nháy LED PC13, tổ chức theo kiến trúc AUTOSAR: SWC → RTE → IoHwAb → MCAL (Mcu, Port, Dio), SysTick 1 ms làm nhịp | Đã chạy trên Blue Pill, debug call stack + SFRs |
 
 ## Cách mở project
 
