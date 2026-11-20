@@ -21,6 +21,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 |---|---|---|
 | [`bai01_led_pc13`](bai01_led_pc13) | Tạo thanh ghi từ địa chỉ (macro và struct), bật clock GPIOC, cấu hình CRH, nháy LED PC13 bằng BSRR/BRR | Đã chạy trên Blue Pill |
 | [`bai02_autosar_led`](bai02_autosar_led) | Cùng bài toán nháy LED PC13, tổ chức theo kiến trúc AUTOSAR: SWC → RTE → IoHwAb → MCAL (Mcu, Port, Dio), SysTick 1 ms làm nhịp | Đã chạy trên Blue Pill, debug call stack + SFRs |
+| [`bai03_lcd1602_clock`](bai03_lcd1602_clock) | Đồng hồ trên LCD1602 qua module I2C PCF8574: driver I2C1 polling (PB6/PB7), HD44780 4 bit, SysTick 1 ms từ HSE 8 MHz, lịch có năm nhuận | Đã chạy trên Blue Pill (module 0x27), host test 33/33 |
 
 ## Cách mở project
 
