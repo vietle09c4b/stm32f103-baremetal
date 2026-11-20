@@ -23,6 +23,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 | [`bai02_autosar_led`](bai02_autosar_led) | Cùng bài toán nháy LED PC13, tổ chức theo kiến trúc AUTOSAR: SWC → RTE → IoHwAb → MCAL (Mcu, Port, Dio), SysTick 1 ms làm nhịp | Đã chạy trên Blue Pill, debug call stack + SFRs |
 | [`bai03_lcd1602_clock`](bai03_lcd1602_clock) | Đồng hồ trên LCD1602 qua module I2C PCF8574: driver I2C1 polling (PB6/PB7), HD44780 4 bit, SysTick 1 ms từ HSE 8 MHz, lịch có năm nhuận | Đã chạy trên Blue Pill (module 0x27), host test 33/33 |
 | [`bai04_gpio_input`](bai04_gpio_input) | Đọc nút nhấn PA0 (input pull-up: CNF0 = 10, ODR0 = 1), chống dội 20 ms bằng SysTick, LED PC13 theo nút; header CMSIS của ST | Đã chạy trên Blue Pill, debug SFRs, host test 11/11 |
+| [`bai04b_autosar_button`](bai04b_autosar_button) | Cùng bài toán nút nhấn PA0, tổ chức theo AUTOSAR: Port bật pull-up qua cấu hình, Dio đọc IDR, IoHwAb đảo mức và chống dội 20 ms (5 mẫu cách 5 ms), SWC qua RTE client-server | Đã chạy trên Blue Pill, debug call stack + SFRs, host test 16/16 |
 
 ## Cách mở project
 
