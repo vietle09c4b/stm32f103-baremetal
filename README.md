@@ -1,6 +1,6 @@
 # STM32F103 bare-metal (Blue Pill)
 
-Lập trình STM32F103C8T6 ở mức thanh ghi: không dùng HAL, không dùng LL, không dùng header CMSIS của thiết bị. Mỗi thanh ghi được tạo từ địa chỉ trong RM0008.
+Lập trình STM32F103C8T6 ở mức thanh ghi: không dùng HAL, không dùng LL. Bài 1–3 tự tạo thanh ghi từ địa chỉ trong RM0008; từ bài 4 dùng header CMSIS của ST (`chip_headers/`, chỉ chứa địa chỉ, struct thanh ghi và tên bit, giấy phép Apache 2.0).
 
 `bai02_autosar_led` là stack AUTOSAR viết tay để minh họa kiến trúc (API theo AUTOSAR CP SWS R25-11), không phải MCAL đạt chuẩn: không có ARXML, RTE generator, DET hay AUTOSAR OS.
 
@@ -22,6 +22,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 | [`bai01_led_pc13`](bai01_led_pc13) | Tạo thanh ghi từ địa chỉ (macro và struct), bật clock GPIOC, cấu hình CRH, nháy LED PC13 bằng BSRR/BRR | Đã chạy trên Blue Pill |
 | [`bai02_autosar_led`](bai02_autosar_led) | Cùng bài toán nháy LED PC13, tổ chức theo kiến trúc AUTOSAR: SWC → RTE → IoHwAb → MCAL (Mcu, Port, Dio), SysTick 1 ms làm nhịp | Đã chạy trên Blue Pill, debug call stack + SFRs |
 | [`bai03_lcd1602_clock`](bai03_lcd1602_clock) | Đồng hồ trên LCD1602 qua module I2C PCF8574: driver I2C1 polling (PB6/PB7), HD44780 4 bit, SysTick 1 ms từ HSE 8 MHz, lịch có năm nhuận | Đã chạy trên Blue Pill (module 0x27), host test 33/33 |
+| [`bai04_gpio_input`](bai04_gpio_input) | Đọc nút nhấn PA0 (input pull-up: CNF0 = 10, ODR0 = 1), chống dội 20 ms bằng SysTick, LED PC13 theo nút; header CMSIS của ST | Đã chạy trên Blue Pill, debug SFRs, host test 11/11 |
 
 ## Cách mở project
 
