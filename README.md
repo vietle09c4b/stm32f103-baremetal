@@ -26,6 +26,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 | [`bai04b_autosar_button`](bai04b_autosar_button) | Cùng bài toán nút nhấn PA0, tổ chức theo AUTOSAR: Port bật pull-up qua cấu hình, Dio đọc IDR, IoHwAb đảo mức và chống dội 20 ms (5 mẫu cách 5 ms), SWC qua RTE client-server | Đã chạy trên Blue Pill, debug call stack + SFRs, host test 16/16 |
 | [`bai05_uart`](bai05_uart) | USART1 PA9/PA10 qua CP2102: AF push-pull / input pull-up trong CRH, BRR = 0x45 (115200 baud ở 8 MHz), ghi chờ TXE, đọc chờ RXNE, printf qua `__io_putchar`, LED PC13 theo ký tự | Đã chạy trên Blue Pill qua CP2102 + PuTTY, debug SFRs USART1/GPIOA |
 | [`bai06_systick`](bai06_systick) | SysTick của lõi Cortex-M3: LOAD = 7999 (1 ms ở HCLK 8 MHz), xóa VAL, CTRL = CLKSOURCE \| ENABLE, delay chờ COUNTFLAG, LED PC13 đảo mỗi 1000 ms | Đã chạy trên Blue Pill, debug SFRs SysTick (CTRL 0x5, LOAD 0x1F3F, CALIB 0x40002328) + Live Expressions |
+| [`bai07_timer`](bai07_timer) | TIM2 time base 1 Hz (PSC 7999, ARR 999, UG) + output compare toggle PA0, TIM3 input capture PA6 (10 kHz, CC1S = 01), jumper PA0 → PA6 | Đã chạy trên Blue Pill: chu kỳ đo 20000 tick = 2000 ms, debug TIM2/TIM3/GPIOA |
 
 ## Cách mở project
 
