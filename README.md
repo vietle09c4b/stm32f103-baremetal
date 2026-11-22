@@ -28,6 +28,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 | [`bai06_systick`](bai06_systick) | SysTick của lõi Cortex-M3: LOAD = 7999 (1 ms ở HCLK 8 MHz), xóa VAL, CTRL = CLKSOURCE \| ENABLE, delay chờ COUNTFLAG, LED PC13 đảo mỗi 1000 ms | Đã chạy trên Blue Pill, debug SFRs SysTick (CTRL 0x5, LOAD 0x1F3F, CALIB 0x40002328) + Live Expressions |
 | [`bai07_timer`](bai07_timer) | TIM2 time base 1 Hz (PSC 7999, ARR 999, UG) + output compare toggle PA0, TIM3 input capture PA6 (10 kHz, CC1S = 01), jumper PA0 → PA6 | Đã chạy trên Blue Pill: chu kỳ đo 20000 tick = 2000 ms, debug TIM2/TIM3/GPIOA |
 | [`bai08_interrupt`](bai08_interrupt) | Ngắt: SysTick 1 ms (TICKINT), TIM2 update 1 Hz (UIE, IRQ 28), EXTI0 nút PA0 cạnh xuống (AFIO_EXTICR1, IRQ 6), NVIC ISER/IPR ghi trực tiếp, vòng lặp chính rỗng | Đã chạy trên Blue Pill: 5 lần nhấn = g_presses 5, đọc NVIC/EXTI/AFIO, call stack trong TIM2_IRQHandler |
+| [`bai09_dma`](bai09_dma) | DMA1 Channel 4 gửi USART1 (PA9, 115200, CCR4 DIR/MINC/TCIE, USART1_CR3.DMAT, IRQ 14) + memory-to-memory Channel 1 (32 word flash → RAM) | Đã chạy trên Blue Pill với CP2102 + PuTTY: main chạy ~833–855 vòng trong mỗi lần gửi, đọc CCR4/CNDTR4/CPAR4/ISR, breakpoint trong ISR |
 
 ## Cách mở project
 
