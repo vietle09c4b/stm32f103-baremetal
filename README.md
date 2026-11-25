@@ -2,7 +2,7 @@
 
 Lập trình STM32F103C8T6 ở mức thanh ghi: không dùng HAL, không dùng LL. Bài 1–3 tự tạo thanh ghi từ địa chỉ trong RM0008; từ bài 4 dùng header CMSIS của ST (`chip_headers/`, chỉ chứa địa chỉ, struct thanh ghi và tên bit, giấy phép Apache 2.0).
 
-`bai02_autosar_led` là stack AUTOSAR viết tay để minh họa kiến trúc (API theo AUTOSAR CP SWS R25-11), không phải MCAL đạt chuẩn: không có ARXML, RTE generator, DET hay AUTOSAR OS.
+`bai02_autosar_led`, `bai04b_autosar_button` và `bai10b_autosar_can` là stack AUTOSAR viết tay để minh họa kiến trúc (API theo AUTOSAR CP SWS R25-11), không phải MCAL đạt chuẩn: không có ARXML, RTE generator, DET hay AUTOSAR OS.
 
 Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên [vietc4b.com](https://vietc4b.com).
 
@@ -30,6 +30,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 | [`bai08_interrupt`](bai08_interrupt) | Ngắt: SysTick 1 ms (TICKINT), TIM2 update 1 Hz (UIE, IRQ 28), EXTI0 nút PA0 cạnh xuống (AFIO_EXTICR1, IRQ 6), NVIC ISER/IPR ghi trực tiếp, vòng lặp chính rỗng | Đã chạy trên Blue Pill: 5 lần nhấn = g_presses 5, đọc NVIC/EXTI/AFIO, call stack trong TIM2_IRQHandler |
 | [`bai09_dma`](bai09_dma) | DMA1 Channel 4 gửi USART1 (PA9, 115200, CCR4 DIR/MINC/TCIE, USART1_CR3.DMAT, IRQ 14) + memory-to-memory Channel 1 (32 word flash → RAM) | Đã chạy trên Blue Pill với CP2102 + PuTTY: main chạy ~833–855 vòng trong mỗi lần gửi, đọc CCR4/CNDTR4/CPAR4/ISR, breakpoint trong ISR |
 | [`bai10_can`](bai10_can) | bxCAN CAN1 500 kbit/s (HSE 8 MHz, CAN_BTR 0x001C0000), remap PB8 RX / PB9 TX, bộ lọc bank 0 list 32 bit (0x321, 0x123), TX mailbox, ngắt FIFO0 (IRQ 20); chế độ Loop back + Silent hoặc Normal | Đã chạy trên Blue Pill: loopback tx = rx; Normal với TJA1050 + PCAN-USB (PCAN-View 500 kbit/s), 0x321 bật/tắt LED PC13, ESR = 0; lỗi ACK khi thiếu node: TEC 128, error passive |
+| [`bai10b_autosar_can`](bai10b_autosar_can) | Cùng bài toán CAN, tổ chức theo AUTOSAR CP R25-11: SWC → RTE → Com → PduR → LSduR → CanIf → Can Driver → bxCAN; Com gửi I-PDU 0x123 theo chu kỳ 100 ms, CanIf lọc phần mềm 0x321, TxConfirmation bằng polling, nhận bằng ngắt FIFO0 | Đã chạy trên Blue Pill với TJA1050 + PCAN-USB: 0x123 mỗi 100 ms, 0x321 bật/tắt LED PC13, call stack gửi/nhận qua đủ các lớp, ESR = 0 |
 
 ## Cách mở project
 
