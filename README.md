@@ -2,7 +2,7 @@
 
 Lập trình STM32F103C8T6 ở mức thanh ghi: không dùng HAL, không dùng LL. Bài 1–3 tự tạo thanh ghi từ địa chỉ trong RM0008; từ bài 4 dùng header CMSIS của ST (`chip_headers/`, chỉ chứa địa chỉ, struct thanh ghi và tên bit, giấy phép Apache 2.0).
 
-`bai02_autosar_led`, `bai04b_autosar_button` và `bai10b_autosar_can` là stack AUTOSAR viết tay để minh họa kiến trúc (API theo AUTOSAR CP SWS R25-11), không phải MCAL đạt chuẩn: không có ARXML, RTE generator, DET hay AUTOSAR OS.
+`bai02_autosar_led`, `bai04b_autosar_button`, `bai10b_autosar_can` và `bai15b_autosar_nvm` là stack AUTOSAR viết tay để minh họa kiến trúc (API theo AUTOSAR CP SWS R25-11; riêng memory stack của `bai15b_autosar_nvm` theo R20-11), không phải MCAL đạt chuẩn: không có ARXML, RTE generator, DET hay AUTOSAR OS.
 
 Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên [vietc4b.com](https://vietc4b.com).
 
@@ -36,6 +36,7 @@ Repo này là mã nguồn cho series bài viết **Bare-metal STM32F103** trên 
 | [`bai13_spi_loopback`](bai13_spi_loopback) | SPI1 master polling (PA5 SCK, PA6 MISO pull-up, PA7 MOSI, PA4 CS bằng GPIO), CR1 ghi một lần khi SPE = 0, SSM = SSI = 1, trao đổi từng byte (TXE → DR → RXNE → DR), truyền liên tục theo RM0008 25.3.5, CRC-8 phần cứng, cố ý gây OVR và MODF | Đã chạy trên Blue Pill với jumper PA7→PA6: 4 mode + khung 16 bit 0 byte sai, SCK nghỉ = CPOL, CRC = 0x27 khớp CRC phần mềm, OVR (SR 0x43) và MODF (CR1 0x210) xóa được, kiểu liên tục OVR ở /2–/8 (-O0), rút jumper nhận 0xFF |
 | [`bai14_watchdog`](bai14_watchdog) | IWDG (LSI, khóa KR 0xCCCC/0x5555/0xAAAA, PR/RLR, chờ PVU/RVU) và WWDG (WDGTB = 3, cửa sổ W = 0x50, ngắt EWI), đọc/xóa cờ RCC_CSR, máy trạng thái qua reset lưu trong BKP_DR1..DR10 | Đã chạy trên Blue Pill: IWDG danh định 1 s reset sau 1008 ms (LSI ≈ 39,7 kHz), nạp WWDG ở 50 ms gây reset, nạp ở 230 ms không reset, EWI 255 ms / reset 259 ms, PINRSTF bật kèm IWDGRSTF/WWDGRSTF |
 | [`bai15_flash`](bai15_flash) | Flash nội: unlock FPEC (KEY1/KEY2), xóa trang (PER, AR, STRT), ghi half-word (PG), xử lý ES096 2.2.11, đo thời gian BSY bằng DWT, nhật ký đếm khởi động ghi nối tiếp ở trang 63; linker giảm FLASH còn 62 KB | Đã chạy trên Blue Pill: xóa trang BSY 21,99 ms, ghi half-word 57,5–62,25 µs, PGERR khi ghi đè và ngoại lệ 0x0000, bộ đếm tăng 3 → 5 qua 2 lần rút điện |
+| [`bai15b_autosar_nvm`](bai15b_autosar_nvm) | Memory stack AUTOSAR CP R20-11: SWC → RTE → NvM → MemIf → Fee → Fls → FPEC; NvM block NATIVE với CRC16 và ROM default, ReadAll lúc khởi động, WriteBlock, WriteAll khi tắt máy (giữ nút 2 s); Fee 2 bank × 2 KB ghi nối tiếp và dọn rác; linker FLASH 60 KB | Đã chạy trên Blue Pill: lần đầu RESTORED_DEFAULTS, dữ liệu giữ qua rút điện, CRC phát hiện ô bị ghi đè, 400 lần ghi với 2 lần dọn rác không lỗi, WriteAll 4,0 ms |
 
 ## Cách mở project
 
